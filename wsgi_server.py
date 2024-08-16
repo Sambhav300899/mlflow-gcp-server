@@ -1,11 +1,24 @@
 import os
 from mlflow.server import app
-from mlflow.server.handlers import initialize_stores
+from mlflow.server.handlers import initialize_backend_stores
 from wsgi_basic_auth import BasicAuth
 
 # Get configuration from environment variables
 USERNAME = 'foo'
 PASSWORD = 'bar'
+DB_URL = os.environ['POSTGRESQL_URL']
+ARTIFACT_ROOT = os.environ['STORAGE_URL']
+# Initialize the backend stores
+initialize_backend_stores(DB_URL, ARTIFACT_ROOT, None)
+
+# Set the MLflow tracking URI
+app.config['MLFLOW_TRACKING_URI'] = DB_URL
+
+# Set the default artifact root
+app.config['MLFLOW_ARTIFACT_ROOT'] = ARTIFACT_ROOT
+
+# # Set the app name
+# app.config['MLFLOW_APP_NAME'] = "basic-auth"
 
 application = BasicAuth(app, users={USERNAME: PASSWORD})
 
