@@ -3,25 +3,24 @@ from wsgi_basic_auth import BasicAuth
 from mlflow.server import app as mlflow_app
 
 
-app = BasicAuth(mlflow_app)
 
 
 # Get configuration from environment variables
-# DB_URL = os.environ.get('POSTGRESQL_URL', None)
-# ARTIFACT_ROOT = os.environ.get('STORAGE_URL', "/tmp/mlruns")
+DB_URL = os.environ.get('POSTGRESQL_URL', None)
+ARTIFACT_ROOT = os.environ.get('STORAGE_URL', "/tmp/mlruns")
 # # Initialize the backend stores
 # # initialize_backend_stores(DB_URL, ARTIFACT_ROOT, None)
 
 # # Set the MLflow tracking URI
-# app.config['MLFLOW_TRACKING_URI'] = DB_URL
+mlflow_app.config['MLFLOW_TRACKING_URI'] = DB_URL
 
 # # Set the default artifact root
-# app.config['MLFLOW_ARTIFACT_ROOT'] = ARTIFACT_ROOT
+mlflow_app.config['MLFLOW_ARTIFACT_ROOT'] = ARTIFACT_ROOT
 
 # # Set the app name
 # app.config['MLFLOW_APP_NAME'] = "basic-auth"
 
-# application = BasicAuth(app, )
+app = BasicAuth(mlflow_app)
 
 if __name__ == "__main__":
     # This block allows running the script directly for testing
