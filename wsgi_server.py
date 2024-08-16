@@ -1,7 +1,10 @@
 import os
-from mlflow.server import app
-from mlflow.server.handlers import initialize_backend_stores
 from wsgi_basic_auth import BasicAuth
+from mlflow.server import app as mlflow_app
+
+
+app = BasicAuth(mlflow_app)
+
 
 # Get configuration from environment variables
 # DB_URL = os.environ.get('POSTGRESQL_URL', None)
@@ -18,10 +21,10 @@ from wsgi_basic_auth import BasicAuth
 # # Set the app name
 # app.config['MLFLOW_APP_NAME'] = "basic-auth"
 
-application = BasicAuth(app, users={"foo": "bar"})
+# application = BasicAuth(app, )
 
 if __name__ == "__main__":
     # This block allows running the script directly for testing
     from werkzeug.serving import run_simple
 
-    run_simple("0.0.0.0", 5000, application)
+    run_simple("0.0.0.0", 5000, app)
