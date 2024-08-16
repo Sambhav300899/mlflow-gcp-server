@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # used params from here - https://stackoverflow.com/questions/71687131/how-to-import-mlflow-tracking-server-wsgi-application-via-flask-or-fastapi
 
 export _MLFLOW_SERVER_FILE_STORE=$POSTGRESQL_URL
