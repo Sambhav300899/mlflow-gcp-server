@@ -12,10 +12,10 @@ X = np.random.rand(100, 1)
 y = 3 * X.squeeze() + 2 + np.random.randn(100) * 0.5
 
 ############## Set MLflow tracking URI ##############
-os.environ["MLFLOW_TRACKING_USERNAME"] = "foo"
-os.environ["MLFLOW_TRACKING_PASSWORD"] = "bar"
+os.environ["MLFLOW_TRACKING_USERNAME"] = ""
+os.environ["MLFLOW_TRACKING_PASSWORD"] = ""
 
-mlflow.set_tracking_uri("https://mlflow-runner-pxqwrkeeca-uc.a.run.app")
+mlflow.set_tracking_uri("")
 #####################################################
 
 # Split the data
